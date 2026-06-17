@@ -1,61 +1,54 @@
 body {
     font-family: Arial, sans-serif;
-    /* Sets the font to Arial, or any sans-serif if Arial is missing */
-
     background: radial-gradient(circle, white, lightgray);
-    /* Creates a background that starts white at the center
-       and fades to light gray at the edges */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 h1 {
     color: darkblue;
-    /* Sets text color to a dark blue shade */
-
     padding: 8px;
-    /* Adds 8 pixels of space inside the element around the text */
-
     text-shadow: 5px 5px 6px gray;
-    /* Adds a shadow to the text:
-       - 5px horizontal offset (right)
-       - 5px vertical offset (down)
-       - 6px blur radius (softness)
-       - gray color */
+    margin-bottom: 4px;
+}
+
+.artist {
+    color: gray;
+    font-style: italic;
+    font-size: 14px;
+    margin-top: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    width: auto;
 }
 
 p {
     color: white;
-    /* Sets lyric text color to white */
-
     width: 350px;
-    /* Restricts the width of lyric lines to 350 pixels */
-
     font-size: 16px;
-    /* Sets text size */
-
     padding: 10px;
-    /* Adds breathing room inside the paragraph box */
-
     background: linear-gradient(to bottom right, darkblue, skyblue);
-    /* Creates a gradient background flowing from top-left to bottom-right,
-       starting with darkblue and ending with skyblue */
-
     box-shadow: 5px 5px 6px gray;
-    /* Adds a shadow behind the paragraph box for depth */
-
     border-radius: 5px;
-    /* Rounds the corners of the box by 5 pixels */
 }
 
-/* Selects ONLY the 5th paragraph element */
 p:nth-child(5) {
     background: revert;
     box-shadow: revert;
     padding: revert;
-    /* 'revert' resets these properties to the browser's default,
-       effectively removing the custom styling for this specific line */
+}
+
+.credit {
+    margin-top: 16px;
 }
 
 a {
     font-size: 12px;
-    /* Makes the link text smaller */
 }
