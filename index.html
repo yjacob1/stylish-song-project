@@ -3,27 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Song - Yesterday</title>
+    <title>Yesterday - The Beatles (Interactive Lyric Player)</title>
+    <!-- Modern Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+        <span class="icon">🌙</span>
+    </button>
 
-    <h1>Yesterday</h1>
+    <div class="player-container">
+        <div class="album-art-container">
+            <div class="album-art">
+                <div class="vinyl-disc"></div>
+            </div>
+            <div class="song-details">
+                <h1 id="song-title">Yesterday</h1>
+                <p class="artist-name">The Beatles</p>
+            </div>
+        </div>
 
-    <p>Yesterday, all my troubles seemed so far away</p>
-    <p>Now it looks as though they're here to stay</p>
-    <p>Oh, I believe in yesterday</p>
+        <div class="lyrics-container" id="lyrics-container">
+            <p id="line-1" class="lyric-line" data-time="0">Yesterday, all my troubles seemed so far away</p>
+            <p id="line-2" class="lyric-line" data-time="6">Now it looks as though they're here to stay</p>
+            <p id="line-3" class="lyric-line" data-time="12">Oh, I believe in yesterday</p>
 
-    <p>Suddenly, I'm not half the man I used to be</p>
-    <p>There's a shadow hanging over me</p>
-    <p>Oh, yesterday came suddenly</p>
+            <p id="line-4" class="lyric-line" data-time="18">Suddenly, I'm not half the man I used to be</p>
+            <p id="line-5" class="lyric-line" data-time="24">There's a shadow hanging over me</p>
+            <p id="line-6" class="lyric-line" data-time="30">Oh, yesterday came suddenly</p>
 
-    <p>Why she had to go I don't know she wouldn't say</p>
-    <p>I said something wrong, now I long for yesterday</p>
+            <p id="line-7" class="lyric-line" data-time="36">Why she had to go I don't know she wouldn't say</p>
+            <p id="line-8" class="lyric-line" data-time="45">I said something wrong, now I long for yesterday</p>
+        </div>
 
-    <div>
-        <a href="#">Lyrics by The Beatles</a>
+        <div class="controls-container">
+            <div class="progress-area">
+                <div class="time-display" id="current-time">0:00</div>
+                <div class="progress-bar-wrapper" id="progress-bar-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="time-display" id="total-duration">0:55</div>
+            </div>
+
+            <div class="play-controls">
+                <button class="control-btn" id="prev-btn" aria-label="Previous Line">⏮</button>
+                <button class="control-btn play-pause-btn" id="play-btn" aria-label="Play or Pause">
+                    <span class="play-icon">▶</span>
+                </button>
+                <button class="control-btn" id="next-btn" aria-label="Next Line">⏭</button>
+            </div>
+
+            <div class="visualizer" id="visualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="https://www.thebeatles.com" target="_blank" id="lyrics-link">Lyrics by The Beatles</a>
+        </div>
     </div>
 
+    <script src="app.js"></script>
 </body>
 </html>

@@ -1,33 +1,181 @@
+/* Core Theme Variables */
+:root {
+    --bg-gradient: radial-gradient(circle, white, lightgray);
+    --text-color: #333333;
+    --h1-color: darkblue;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --lyric-bg: linear-gradient(to bottom right, darkblue, skyblue);
+    --lyric-text: white;
+    --lyric-active-bg: linear-gradient(to bottom right, #ff4500, #ff8c00);
+    --lyric-active-shadow: 0 0 12px rgba(255, 69, 0, 0.6);
+    --btn-bg: #e0e0e0;
+    --btn-color: #333333;
+}
+
+[data-theme="dark"] {
+    --bg-gradient: radial-gradient(circle, #1a1a2e, #16161d);
+    --text-color: #e2e8f0;
+    --h1-color: #63b3ed;
+    --card-bg: rgba(26, 26, 46, 0.9);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --lyric-bg: linear-gradient(to bottom right, #1a365d, #2b6cb0);
+    --lyric-text: #e2e8f0;
+    --lyric-active-bg: linear-gradient(to bottom right, #d69e2e, #dd6b20);
+    --lyric-active-shadow: 0 0 12px rgba(221, 107, 32, 0.6);
+    --btn-bg: #2d3748;
+    --btn-color: #e2e8f0;
+}
+
 body {
     font-family: Arial, sans-serif;
     /* Sets the font to Arial, or any sans-serif if Arial is missing */
 
-    background: radial-gradient(circle, white, lightgray);
+    background: var(--bg-gradient);
     /* Creates a background that starts white at the center
        and fades to light gray at the edges */
+    
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Theme Toggle Button */
+.theme-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s, transform 0.2s;
+}
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Main Player Card Container */
+.player-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.album-art-container {
+    margin-bottom: 20px;
+}
+.album-art {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+    background: #333;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.vinyl-disc {
+    width: 25px;
+    height: 25px;
+    background: #555;
+    border-radius: 50%;
+    border: 5px solid #222;
+}
+
+/* Dynamic visualizer */
+.visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 20px;
+    gap: 3px;
+    margin-top: 15px;
+}
+.visualizer .bar {
+    width: 4px;
+    height: 3px;
+    background: var(--h1-color);
+    border-radius: 2px;
+    transition: height 0.1s ease;
+}
+.playing .visualizer .bar {
+    animation: bounce 0.8s ease infinite alternate;
+}
+.playing .visualizer .bar:nth-child(2) { animation-delay: 0.1s; }
+.playing .visualizer .bar:nth-child(3) { animation-delay: 0.2s; }
+.playing .visualizer .bar:nth-child(4) { animation-delay: 0.15s; }
+.playing .visualizer .bar:nth-child(5) { animation-delay: 0.3s; }
+.playing .visualizer .bar:nth-child(6) { animation-delay: 0.05s; }
+.playing .visualizer .bar:nth-child(7) { animation-delay: 0.25s; }
+.playing .visualizer .bar:nth-child(8) { animation-delay: 0.12s; }
+
+@keyframes bounce {
+    0% { height: 3px; }
+    100% { height: 20px; }
 }
 
 h1 {
-    color: darkblue;
+    color: var(--h1-color);
     /* Sets text color to a dark blue shade */
 
     padding: 8px;
     /* Adds 8 pixels of space inside the element around the text */
 
-    text-shadow: 5px 5px 6px gray;
-    /* Adds a shadow to the text:
-       - 5px horizontal offset (right)
-       - 5px vertical offset (down)
-       - 6px blur radius (softness)
-       - gray color */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    /* Adds a shadow to the text */
+    margin: 0;
+    font-size: 28px;
+}
+
+.artist-name {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 5px 0 20px;
+}
+
+.lyrics-container {
+    max-height: 280px;
+    overflow-y: auto;
+    margin: 20px 0;
+    padding-right: 5px;
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar styling */
+.lyrics-container::-webkit-scrollbar {
+    width: 6px;
+}
+.lyrics-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 
 p {
-    color: white;
+    color: var(--lyric-text);
     /* Sets lyric text color to white */
 
-    width: 350px;
-    /* Restricts the width of lyric lines to 350 pixels */
+    width: auto;
+    max-width: 350px;
+    /* Restricts the width of lyric lines */
 
     font-size: 16px;
     /* Sets text size */
@@ -35,15 +183,30 @@ p {
     padding: 10px;
     /* Adds breathing room inside the paragraph box */
 
-    background: linear-gradient(to bottom right, darkblue, skyblue);
+    background: var(--lyric-bg);
     /* Creates a gradient background flowing from top-left to bottom-right,
        starting with darkblue and ending with skyblue */
 
-    box-shadow: 5px 5px 6px gray;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     /* Adds a shadow behind the paragraph box for depth */
 
     border-radius: 5px;
     /* Rounds the corners of the box by 5 pixels */
+    
+    margin: 10px auto;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+}
+
+p:hover {
+    transform: scale(1.02);
+}
+
+/* Active Lyric Line Highlighting */
+p.active {
+    background: var(--lyric-active-bg);
+    box-shadow: var(--lyric-active-shadow);
+    transform: scale(1.05);
 }
 
 /* Selects ONLY the 5th paragraph element */
@@ -55,7 +218,89 @@ p:nth-child(5) {
        effectively removing the custom styling for this specific line */
 }
 
+/* Controls Styling */
+.controls-container {
+    margin-top: 20px;
+}
+
+.progress-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.time-display {
+    font-size: 12px;
+    min-width: 30px;
+}
+
+.progress-bar-wrapper {
+    flex-grow: 1;
+    height: 6px;
+    background: var(--btn-bg);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--h1-color);
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.1s linear;
+}
+
+.play-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-btn {
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s, background 0.2s;
+}
+.control-btn:hover {
+    transform: scale(1.1);
+}
+
+.play-pause-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    background: var(--h1-color);
+    color: white;
+}
+.play-pause-btn:hover {
+    background: var(--lyric-active-bg);
+}
+
+.footer-links {
+    margin-top: 20px;
+}
+
 a {
     font-size: 12px;
     /* Makes the link text smaller */
+    color: var(--h1-color);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
