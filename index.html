@@ -9,6 +9,7 @@
 <body>
 
     <div class="container">
+        <button id="theme-toggle" class="theme-toggle-btn">🌙 Dark Mode</button>
         <h1>Yesterday</h1>
         <p class="artist">The Beatles &mdash; 1965</p>
 
@@ -28,5 +29,21 @@
         </div>
     </div>
 
+    <script>
+        // Dark Mode Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+        });
+
+        // Click to highlight lyric line
+        const lyrics = document.querySelectorAll('.container p:not(.artist)');
+        lyrics.forEach(lyric => {
+            lyric.addEventListener('click', () => {
+                lyric.classList.toggle('highlighted');
+            });
+        });
+    </script>
 </body>
 </html>
